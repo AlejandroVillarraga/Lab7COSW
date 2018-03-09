@@ -21,7 +21,7 @@
     <string name="point">.</string>
     <string name="potencyY">X^Y</string>
     <string name="inverse">1/x</string>
-    <string name="changeOfSign">Cambiar Signo</string>
+    <string name="changeOfSign">+/-</string>
     <string name="clear">AC</string>
 
     <string name="sin">sin</string>
