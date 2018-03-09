@@ -1,11 +1,6 @@
 # Introduction to Android Applications
 Introductory project to develop applications for Android.
 
-
-
-
-
-
 The aim of this code lab will be to learn the basics about developing Android applications.
 
 
