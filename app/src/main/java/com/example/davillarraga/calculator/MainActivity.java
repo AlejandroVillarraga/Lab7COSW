@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Stack<Double> numbers =new Stack<Double>();
     private TextView text;
+    private TextView lastStepText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,146 +21,140 @@ public class MainActivity extends AppCompatActivity {
         //Este comando oculta la barra de notificaciones
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        text = (TextView) findViewById(R.id.resultado);
+        text = (TextView) findViewById(R.id.result);
+        lastStepText = (TextView) findViewById(R.id.lastStep);
 
         //Cero
         findViewById(R.id.button_cero).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(0.0);
-                    text.setText("0.0");
-                }else text.setText("Error");
+                setTextNumbers(0.0);
             }
         });
 
         //Uno
         findViewById(R.id.button_one).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(1.0);
-                    text.setText("1.0");
-                }else text.setText("Error");
+                setTextNumbers(1.0);
             }
         });
 
         //Dos
         findViewById(R.id.button_two).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(2.0);
-                    text.setText("2.0");
-                }else text.setText("Error");
-
+                setTextNumbers(2.0);
             }
         });
 
         //Tres
         findViewById(R.id.button_three).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(3.0);
-                    text.setText("3.0");
-                }else text.setText("Error");
+                setTextNumbers(3.0);
             }
         });
 
         //Cuatro
         findViewById(R.id.button_four).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(4.0);
-                    text.setText("4.0");
-                }else text.setText("Error");
-
+                setTextNumbers(4.0);
             }
         });
 
         findViewById(R.id.button_five).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(5.0);
-                    text.setText("5.0");
-                }else text.setText("Error");
-
+                setTextNumbers(5.0);
             }
         });
 
         findViewById(R.id.button_six).setOnClickListener(new View.OnClickListener() { public void onClick(View v) {
-            if(numbers.size()<2){
-                numbers.push(6.0);  text.setText("6.0");
-            }else text.setText("Error");
+                setTextNumbers(6.0);
         }});
 
         findViewById(R.id.button_seven).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(7.0);
-                    text.setText("7.0");
-                }else text.setText("Error");
-
+                setTextNumbers(7.0);
             }
         });
 
         findViewById(R.id.button_eight).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(numbers.size()<2){
-                    numbers.push(8.0);
-                    text.setText("8.0");
-                }else text.setText("Error");
-
+                setTextNumbers(8.0);
             }
         });
 
 
         findViewById(R.id.button_nine).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if(numbers.size()<2){
-                    numbers.push(9.0);
-                    text.setText("9.0");
-                }else text.setText("Error");
-
+                setTextNumbers(9.0);
             }
         });
 
-
     }
 
+    public void setTextNumbers(double n){
+        if(numbers.size()<1){
+            numbers.push(n);
+            text.setText(numbers.get(0)+"");
+        }
+        else if(numbers.size()<2){
+            numbers.push(n);
+            text.setText(numbers.get(0)+" "+numbers.get(1));
+
+        }else text.setText("Error");
+    }
+
+    public void calculations(String operation){
+        double a;
+        double b;
+        if(numbers.size()>1){
+            a= numbers.pop();
+            b= numbers.pop();
+            if(operation=="+"){
+                numbers.push((b+a));
+                lastStepText.setText(b+" "+a+" "+"+"+" = "+numbers.peek());
+            }
+            if(operation=="-"){
+                numbers.push((b-a));
+                lastStepText.setText(b+" "+a+" "+"-"+" = "+numbers.peek());
+            }
+            if(operation=="*"){
+                numbers.push((b*a));
+                lastStepText.setText(b+" "+a+" "+"*"+" = "+numbers.peek());
+            }
+            if(operation=="/"){
+                numbers.push((b/a));
+                lastStepText.setText(b+" "+a+" "+"/"+" = "+numbers.peek());
+            }
+            if(operation=="pY"){
+                numbers.push((Math.pow(b,a)));
+                lastStepText.setText(b+" "+a+" "+"^"+" = "+numbers.peek());
+            }
+
+        }
+
+        text.setText(""+ numbers.peek());
+    }
 
     public void sum(View view) {
-        if(numbers.size()>1){
-            double a= numbers.pop();
-            double b= numbers.pop();
-            numbers.push((a+b));
-        }
-        text.setText(""+ numbers.peek());
-
+        calculations("+");
     }
 
     public void division(View view) {
-        if(numbers.size()>1){
-            double a= numbers.pop();
-            double b= numbers.pop();
-            numbers.push((a/b));
-        }
-        text.setText(""+ numbers.peek());
+
+        calculations("/");
     }
 
     public void multiplication(View view) {
-        if(numbers.size()>1){
-            double a= numbers.pop();
-            double b= numbers.pop();
-            numbers.push((a*b));
-        }
-        text.setText(""+ numbers.peek());
+
+        calculations("*");
     }
 
     public void substract(View view) {
-        if(numbers.size()>1){
-            double a= numbers.pop();
-            double b= numbers.pop();
-            numbers.push((a-b));
-        }
-        text.setText(""+ numbers.peek());
+
+        calculations("-");
+    }
+
+    public void potencyY(View view) {
+        calculations("pY");
     }
 
 
@@ -189,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clear(View view) {
         numbers.clear();
+        lastStepText.setText("");
         text.setText("0");
     }
 
@@ -208,17 +204,8 @@ public class MainActivity extends AppCompatActivity {
         }else text.setText("Error");
     }
 
-    public void potencyY(View view) {
-        if(numbers.size()>1){
-            double a= numbers.pop();
-            double b= numbers.pop();
-            numbers.push((Math.pow(a,b)));
-        }
-        text.setText(""+ numbers.peek());
-    }
 
     public void inverse(View view) {
-
         if(numbers.size()==1){
             double a= numbers.pop();
             numbers.push((1/a));
