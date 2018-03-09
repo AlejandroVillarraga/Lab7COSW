@@ -121,36 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.button_ten).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if(numbers.size()<2){
-                    numbers.push(10.0);
-                    text.setText("10.0");
-                }else text.setText("Error");
-
-            }
-        });
-
-        findViewById(R.id.button_hundred).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if(numbers.size()<2){
-                    numbers.push(100.0);
-                    text.setText("100.0");
-                }else text.setText("Error");
-
-            }
-        });
-
-        findViewById(R.id.button_thousand).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if(numbers.size()<2){
-                    numbers.push(1000.0);
-                    text.setText("1000.0");
-                }else text.setText("Error");
-
-            }
-        });
-
+       
     }
 
 
