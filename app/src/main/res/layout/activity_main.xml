@@ -215,50 +215,46 @@
     </LinearLayout>
 
     <LinearLayout
+
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
         <Button
-            android:text="@string/n10"
+            android:text="@string/n0"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/button_ten" />
+            android:id="@+id/button_cero"
+            android:layout_weight="0.31" />
+
         <Button
-            android:text="@string/n100"
+            android:text="@string/point"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/button_hundred" />
-        <Button
-            android:text="@string/n1000"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/button_thousand"
-            android:layout_weight="1"
-            />
+            android:id="@+id/button_point"
+            android:layout_weight="0.31" />
+
         <Button
             android:text="@string/sum"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:onClick="sum"
             android:id="@+id/button_suma"
-            android:layout_weight="1" />
+            android:layout_weight="0.31" />
+
+
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
-        <Button
-            android:text="@string/n0"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/button_cero"
-            android:layout_weight="1" />
+
 
         <Button
             android:text="@string/changeOfSign"
