@@ -105,113 +105,87 @@ public class MainActivity extends AppCompatActivity {
     public void calculations(String operation){
         double a;
         double b;
+
         if(numbers.size()>1){
             a= numbers.pop();
             b= numbers.pop();
             if(operation=="+"){
                 numbers.push((b+a));
-                lastStepText.setText(b+" "+a+" "+"+"+" = "+numbers.peek());
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"+"+" = "+numbers.peek());
             }
             if(operation=="-"){
                 numbers.push((b-a));
-                lastStepText.setText(b+" "+a+" "+"-"+" = "+numbers.peek());
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"-"+" = "+numbers.peek());
             }
             if(operation=="*"){
                 numbers.push((b*a));
-                lastStepText.setText(b+" "+a+" "+"*"+" = "+numbers.peek());
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"*"+" = "+numbers.peek());
             }
             if(operation=="/"){
                 numbers.push((b/a));
-                lastStepText.setText(b+" "+a+" "+"/"+" = "+numbers.peek());
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"/"+" = "+numbers.peek());
             }
             if(operation=="pY"){
                 numbers.push((Math.pow(b,a)));
-                lastStepText.setText(b+" "+a+" "+"^"+" = "+numbers.peek());
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"^"+" = "+numbers.peek());
             }
 
         }
-
-        text.setText(""+ numbers.peek());
+        else if(numbers.size()==1){
+            a= numbers.pop();
+            if(operation=="tan"){
+                numbers.push(Math.tan(Math.toDegrees(a)));
+                lastStepText.setText(String.format("%.4f",a)+" "+"TAN"+" = "+numbers.peek());
+            }
+            if(operation=="sin"){
+                numbers.push(Math.sin(Math.toDegrees(a)));
+                lastStepText.setText(String.format("%.4f",a)+" "+"SIN"+" = "+numbers.peek());
+            }
+            if(operation=="cos"){
+                numbers.push(Math.cos(Math.toDegrees(a)));
+                lastStepText.setText(String.format("%.4f",a)+" "+"COS"+" = "+numbers.peek());
+            }
+            if(operation=="changeOfSign"){
+                numbers.push(a*(-1));
+            }
+            if(operation=="potency2"){
+                numbers.push((Math.pow(a,2)));
+                lastStepText.setText(String.format("%.4f",a)+" "+"2 ^"+" = "+numbers.peek());
+            }
+            if(operation=="inverse"){
+                numbers.push((1/a));
+                lastStepText.setText("1"+String.format("%.4f",a)+"/"+" = "+numbers.peek());
+            }
+        }
+        //Muestra el resultado de la operacion
+        text.setText(""+ String.format("%.4f", numbers.peek()));
     }
+    public void sum(View view) { calculations("+");}
 
-    public void sum(View view) {
-        calculations("+");
-    }
+    public void division(View view) { calculations("/");}
 
-    public void division(View view) {
+    public void multiplication(View view) { calculations("*");}
 
-        calculations("/");
-    }
+    public void substract(View view) { calculations("-");}
 
-    public void multiplication(View view) {
+    public void potencyY(View view) { calculations("pY");}
 
-        calculations("*");
-    }
+    public void tan(View view) { calculations("tan");}
 
-    public void substract(View view) {
+    public void cos(View view) { calculations("cos");}
 
-        calculations("-");
-    }
+    public void sin(View view) { calculations("sin");}
 
-    public void potencyY(View view) {
-        calculations("pY");
-    }
+    public void changeOfSign(View view) {calculations("changeOfSign");}
 
+    public void potency2(View view) {calculations("potency2");}
 
-    public void tan(View view) {
-        if(numbers.size()==1){
-            double a= numbers.pop();
-            numbers.push(Math.tan(Math.toDegrees(a)));
-            text.setText(""+ numbers.peek());
-        }else text.setText("Error");
-    }
-
-    public void cos(View view) {
-        if(numbers.size()==1){
-            double a= numbers.pop();
-            numbers.push(Math.cos(Math.toDegrees(a)));
-            text.setText(""+ numbers.peek());
-        }else text.setText("Error");
-    }
-
-    public void sin(View view) {
-        if(numbers.size()==1){
-            double a= numbers.pop();
-            numbers.push(Math.sin(Math.toDegrees(a)));
-            text.setText(""+ numbers.peek());
-        }else text.setText("Error");
-    }
+    public void inverse(View view) { calculations("inverse");}
 
     public void clear(View view) {
         numbers.clear();
         lastStepText.setText("");
         text.setText("0");
-    }
-
-    public void changeOfSign(View view) {
-        if(numbers.size()==1){
-            double a= numbers.pop();
-            numbers.push(a*(-1));
-            text.setText(""+ numbers.peek());
-        }else text.setText("Error");
-    }
-
-    public void potency2(View view) {
-        if(numbers.size()==1){
-            double a= numbers.pop();
-            numbers.push((Math.pow(a,2)));
-            text.setText(""+ numbers.peek());
-        }else text.setText("Error");
-    }
-
-
-    public void inverse(View view) {
-        if(numbers.size()==1){
-            double a= numbers.pop();
-            numbers.push((1/a));
-            text.setText(""+ numbers.peek());
-        }else text.setText("Error");
-
     }
 
     public void submit(View view) {
