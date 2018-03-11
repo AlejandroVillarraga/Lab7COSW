@@ -91,11 +91,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setTextNumbers(double n){
-        if(numbers.size()<1){
+
+        if(numbers.size()==0){
             numbers.push(n);
             text.setText(numbers.get(0)+"");
         }
-        else if(numbers.size()<2){
+        else if(numbers.size()==1){
             numbers.push(n);
             text.setText(numbers.get(0)+" "+numbers.get(1));
 
@@ -106,32 +107,7 @@ public class MainActivity extends AppCompatActivity {
         double a;
         double b;
 
-        if(numbers.size()>1){
-            a= numbers.pop();
-            b= numbers.pop();
-            if(operation=="+"){
-                numbers.push((b+a));
-                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"+"+" = "+numbers.peek());
-            }
-            if(operation=="-"){
-                numbers.push((b-a));
-                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"-"+" = "+numbers.peek());
-            }
-            if(operation=="*"){
-                numbers.push((b*a));
-                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"*"+" = "+numbers.peek());
-            }
-            if(operation=="/"){
-                numbers.push((b/a));
-                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"/"+" = "+numbers.peek());
-            }
-            if(operation=="pY"){
-                numbers.push((Math.pow(b,a)));
-                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"^"+" = "+numbers.peek());
-            }
-
-        }
-        else if(numbers.size()==1){
+        if(numbers.size()==1){
             a= numbers.pop();
             if(operation=="tan"){
                 numbers.push(Math.tan(Math.toDegrees(a)));
@@ -156,9 +132,40 @@ public class MainActivity extends AppCompatActivity {
                 numbers.push((1/a));
                 lastStepText.setText("1"+String.format("%.4f",a)+"/"+" = "+numbers.peek());
             }
+
+            text.setText(""+ String.format("%.4f", numbers.peek()));
+        }
+        else if(numbers.size()==2 && !(operation=="tan")&& !(operation=="sin")&& !(operation=="cos")&& !(operation=="changeOfSing")&& !(operation=="potency2")&& !(operation=="inverse")){
+            a= numbers.pop();
+            b= numbers.pop();
+
+            if(operation=="+"){
+                numbers.push((b+a));
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"+"+" = "+numbers.peek());
+            }
+            if(operation=="-"){
+                numbers.push((b-a));
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"-"+" = "+numbers.peek());
+            }
+            if(operation=="*"){
+                numbers.push((b*a));
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"*"+" = "+numbers.peek());
+            }
+            if(operation=="/"){
+                numbers.push((b/a));
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"/"+" = "+numbers.peek());
+            }
+            if(operation=="pY"){
+                numbers.push((Math.pow(b,a)));
+                lastStepText.setText(String.format("%.4f",b)+" "+String.format("%.4f",a)+" "+"^"+" = "+numbers.peek());
+            }
+
+            text.setText(""+ String.format("%.4f", numbers.peek()));
+        }
+        else{
+            text.setText("Error");
         }
         //Muestra el resultado de la operacion
-        text.setText(""+ String.format("%.4f", numbers.peek()));
     }
     public void sum(View view) { calculations("+");}
 
