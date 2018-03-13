@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         double a;
         double b;
 
-        if(numbers.size()==1){
+        if(numbers.size()==1 && !(operation=="+") && !(operation=="-") && !(operation=="*") && !(operation=="/") && !(operation=="pY")){
             a= numbers.pop();
             if(operation=="tan"){
                 numbers.push(Math.tan(Math.toDegrees(a)));
